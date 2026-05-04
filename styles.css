@@ -70,6 +70,86 @@ body {
   contain: layout paint;
 }
 
+.lilies {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.lily-wrap {
+  position: absolute;
+  animation: lily-drift 10s ease-in-out infinite;
+}
+
+.lily-wrap--tl {
+  top: max(0.25rem, env(safe-area-inset-top, 0px));
+  left: -7%;
+  width: clamp(3.5rem, 19vw, 8rem);
+}
+
+.lily-wrap--tl .lily {
+  transform: rotate(-14deg);
+}
+
+.lily-wrap--tr {
+  top: 5%;
+  right: -9%;
+  width: clamp(3.25rem, 17vw, 7.5rem);
+  animation-duration: 12s;
+  animation-delay: -3.5s;
+}
+
+.lily-wrap--tr .lily {
+  transform: rotate(10deg) scaleX(-1);
+}
+
+.lily-wrap--bl {
+  bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+  left: -6%;
+  width: clamp(2.85rem, 15vw, 6.25rem);
+  animation-duration: 11s;
+  animation-delay: -6.5s;
+}
+
+.lily-wrap--bl .lily {
+  transform: rotate(6deg);
+}
+
+.lily {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.4;
+  color: var(--rose-soft);
+}
+
+.lily--small {
+  opacity: 0.32;
+}
+
+.lily .lily-stem {
+  stroke: rgba(100, 62, 78, 0.9);
+}
+
+@keyframes lily-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+@media (max-width: 380px) {
+  .lily-wrap--bl {
+    display: none;
+  }
+}
+
 .heart {
   position: absolute;
   bottom: -2rem;
@@ -253,6 +333,14 @@ body {
   .headline {
     text-shadow: 0 0 40px rgba(245, 208, 220, 0.22), 0 2px 0 rgba(0, 0, 0, 0.2);
   }
+
+  .lily {
+    opacity: 0.46;
+  }
+
+  .lily--small {
+    opacity: 0.36;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -261,6 +349,10 @@ body {
     opacity: 0.22;
     bottom: auto;
     top: 12%;
+  }
+
+  .lily-wrap {
+    animation: none !important;
   }
 
   .card,
